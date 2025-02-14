@@ -32,6 +32,7 @@ const httpInterceptor = {
       // console.log(__VITE_APP_PROXY__)
       if (JSON.parse(__VITE_APP_PROXY__)) {
         // 啥都不需要做
+        options.url = import.meta.env.VITE_APP_PROXY_PREFIX + options.url
       } else {
         options.url = baseUrl + options.url
       }

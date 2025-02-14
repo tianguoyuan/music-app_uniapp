@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { onLaunch, onShow, onHide } from '@dcloudio/uni-app'
 import 'abortcontroller-polyfill/dist/abortcontroller-polyfill-only'
-
 onLaunch(() => {
   console.log('App Launch')
 })
@@ -32,28 +31,21 @@ image {
   vertical-align: middle;
 }
 
-// 单行省略，优先使用 unocss: text-ellipsis
-.ellipsis {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+// 微信 tabbar.custom隐藏， h5单独设置
+// #ifndef MP
+.uni-tabbar-bottom {
+  display: none;
 }
+// #endif
 
-// 两行省略
-.ellipsis-2 {
-  display: -webkit-box;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
+// #ifdef MP
+pages {
+  background-color: #f8f9fa;
 }
-
-// 三行省略
-.ellipsis-3 {
-  display: -webkit-box;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
+// #endif
+// #ifndef MP
+html {
+  background-color: #f8f9fa;
 }
+// #endif
 </style>

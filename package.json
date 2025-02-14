@@ -23,6 +23,9 @@
     "pnpm": ">=7.30"
   },
   "scripts": {
+    "dev:h5": "uni",
+    "dev:mp-weixin": "uni -p mp-weixin",
+    "lint:fix": "eslint . --fix",
     "preinstall": "npx only-allow pnpm",
     "uvm": "npx @dcloudio/uvm@latest",
     "uvm-rm": "node ./scripts/postupgrade.js",
@@ -32,7 +35,6 @@
     "dev:app-ios": "uni -p app-ios",
     "dev:custom": "uni -p",
     "dev": "uni",
-    "dev:h5": "uni",
     "dev:h5:ssr": "uni --ssr",
     "dev:mp": "uni -p mp-weixin",
     "dev:mp-alipay": "uni -p mp-alipay",
@@ -42,7 +44,6 @@
     "dev:mp-lark": "uni -p mp-lark",
     "dev:mp-qq": "uni -p mp-qq",
     "dev:mp-toutiao": "uni -p mp-toutiao",
-    "dev:mp-weixin": "uni -p mp-weixin",
     "dev:mp-xhs": "uni -p mp-xhs",
     "dev:quickapp-webview": "uni -p quickapp-webview",
     "dev:quickapp-webview-huawei": "uni -p quickapp-webview-huawei",

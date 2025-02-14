@@ -25,16 +25,12 @@
     "spacing": "3px",
     "list": [
       {
-        "iconPath": "static/tabbar/home.png",
-        "selectedIconPath": "static/tabbar/homeHL.png",
         "pagePath": "pages/index/index",
         "text": "首页"
       },
       {
-        "iconPath": "static/tabbar/example.png",
-        "selectedIconPath": "static/tabbar/exampleHL.png",
-        "pagePath": "pages/about/about",
-        "text": "关于"
+        "pagePath": "pages/user/user",
+        "text": "我的"
       }
     ]
   },
@@ -48,10 +44,11 @@
       }
     },
     {
-      "path": "pages/about/about",
+      "path": "pages/user/user",
       "type": "page",
       "style": {
-        "navigationBarTitleText": "关于"
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "首页"
       }
     }
   ],
@@ -60,10 +57,19 @@
       "root": "pages-sub",
       "pages": [
         {
-          "path": "demo/index",
+          "path": "demo/demo",
           "type": "page",
+          "layout": "default",
           "style": {
-            "navigationBarTitleText": "分包页面 标题"
+            "navigationBarTitleText": "demo"
+          }
+        },
+        {
+          "path": "webview/webview",
+          "type": "page",
+          "layout": "default",
+          "style": {
+            "navigationBarTitleText": "webview"
           }
         }
       ]

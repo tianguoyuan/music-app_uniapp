@@ -77,7 +77,7 @@ module.exports = {
     'vue/component-tags-order': [
       'error',
       {
-        order: ['route', 'script', 'template', 'style'],
+        order: ['script', 'template', 'style', 'route'],
       },
     ],
   },
