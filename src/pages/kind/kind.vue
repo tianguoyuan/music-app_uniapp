@@ -3,15 +3,15 @@
 import Tabbar from '@/components/Tabbar.vue'
 
 defineOptions({
-  name: 'User',
+  name: 'Kind',
 })
 </script>
 <template>
   <view class="p-3">
-    <wd-navbar title="user" fixed placeholder safe-area-inset-top></wd-navbar>
+    <wd-navbar title="kind" fixed placeholder safe-area-inset-top></wd-navbar>
 
-    user
-    <Tabbar tabbar-path="/pages/user/user" />
+    kind
+    <Tabbar tabbar-path="/pages/kind/kind" />
   </view>
 </template>
 
@@ -21,7 +21,7 @@ defineOptions({
 {
   style: {
     navigationStyle: 'custom',
-    navigationBarTitleText: '首页',
+    navigationBarTitleText: '分类',
   },
 }
 </route>

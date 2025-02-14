@@ -27,14 +27,10 @@ export default defineUniPages({
     iconWidth: '24px',
     spacing: '3px',
     list: [
-      {
-        pagePath: 'pages/index/index',
-        text: '首页',
-      },
-      {
-        pagePath: 'pages/user/user',
-        text: '我的',
-      },
+      { pagePath: 'pages/index/index' },
+      { pagePath: 'pages/kind/kind' },
+      { pagePath: 'pages/shopping/shopping' },
+      { pagePath: 'pages/user/user' },
     ],
   },
 })

@@ -1,12 +1,16 @@
 <script lang="ts" setup>
-const props = defineProps<{
-  tabbarIndex: number
-}>()
-
 const tabbarList = [
   { title: '首页', icon: 'home', path: '/pages/index/index' },
+  { title: '分类', icon: 'transfer', path: '/pages/kind/kind' },
+  { title: '购物车', icon: 'shop', path: '/pages/shopping/shopping' },
   { title: '我的', icon: 'user', path: '/pages/user/user' },
-]
+] as const
+type PathType = (typeof tabbarList)[number]['path']
+const props = defineProps<{
+  tabbarPath: PathType
+}>()
+
+const tabbarIndex = tabbarList.findIndex((v) => v.path === props.tabbarPath)
 
 function pageTo(index: number) {
   const path = tabbarList[index]?.path
@@ -17,7 +21,7 @@ function pageTo(index: number) {
 
 <template>
   <wd-tabbar
-    :model-value="props.tabbarIndex"
+    :model-value="tabbarIndex"
     fixed
     bordered
     safe-area-inset-bottom

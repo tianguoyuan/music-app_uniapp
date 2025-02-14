@@ -3,15 +3,15 @@
 import Tabbar from '@/components/Tabbar.vue'
 
 defineOptions({
-  name: 'User',
+  name: 'Shopping',
 })
 </script>
 <template>
   <view class="p-3">
-    <wd-navbar title="user" fixed placeholder safe-area-inset-top></wd-navbar>
+    <wd-navbar title="shopping" fixed placeholder safe-area-inset-top></wd-navbar>
 
-    user
-    <Tabbar tabbar-path="/pages/user/user" />
+    shopping
+    <Tabbar tabbar-path="/pages/shopping/shopping" />
   </view>
 </template>
 
@@ -21,7 +21,7 @@ defineOptions({
 {
   style: {
     navigationStyle: 'custom',
-    navigationBarTitleText: '首页',
+    navigationBarTitleText: '购物车',
   },
 }
 </route>

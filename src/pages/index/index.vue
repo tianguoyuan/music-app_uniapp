@@ -46,7 +46,7 @@ function toDemo() {
 
     <wd-button @click="toDemo">主要按钮</wd-button>
 
-    <Tabbar :tabbar-index="0" />
+    <Tabbar tabbar-path="/pages/index/index" />
   </view>
 </template>
 

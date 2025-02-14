@@ -30,6 +30,7 @@
   },
   "exclude": ["node_modules"],
   "include": [
+    "pages.config.ts",
     "src/**/*.ts",
     "src/**/*.js",
     "src/**/*.d.ts",
