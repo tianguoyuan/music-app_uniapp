@@ -85,6 +85,14 @@
           }
         },
         {
+          "path": "demo/list",
+          "type": "page",
+          "layout": "default",
+          "style": {
+            "navigationBarTitleText": "demo-list"
+          }
+        },
+        {
           "path": "webview/webview",
           "type": "page",
           "layout": "default",

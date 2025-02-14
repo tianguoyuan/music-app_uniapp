@@ -5,25 +5,25 @@ import PLATFORM from '@/utils/platform'
 function back() {
   uni.reLaunch({ url: '/pages/index/index' })
 }
+
+function pageToList() {
+  uni.navigateTo({
+    url: '/pages-sub/demo/list',
+  })
+}
 </script>
 
 <template>
   <view class="">
     <view>demo -- {{ PLATFORM.platform }}</view>
     <wd-button @click="back">back</wd-button>
-
-    <view class="w-50 h-50 bg-amber"></view>
-    <view class="block"></view>
+    <view class="mt-3">
+      <wd-button @click="pageToList">PageTo-List</wd-button>
+    </view>
   </view>
 </template>
 
-<style lang="scss" scoped>
-.block {
-  width: 400rpx;
-  height: 400rpx;
-  background-color: aqua;
-}
-</style>
+<style lang="scss" scoped></style>
 
 <route lang="json5" type="page">
 {

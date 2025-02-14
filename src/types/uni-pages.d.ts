@@ -9,6 +9,7 @@ interface NavigateToOptions {
        "/pages/shopping/shopping" |
        "/pages/user/user" |
        "/pages-sub/demo/demo" |
+       "/pages-sub/demo/list" |
        "/pages-sub/webview/webview";
 }
 interface RedirectToOptions extends NavigateToOptions {}
