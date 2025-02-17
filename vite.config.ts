@@ -17,7 +17,13 @@ import UnoCSS from 'unocss/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import ViteRestart from 'vite-plugin-restart'
 import { copyNativeRes } from './vite-plugins/copyNativeRes'
+import pkg from './package.json'
 
+const { dependencies, devDependencies, name, version, engines } = pkg
+const __APP_INFO__ = {
+  pkg: { dependencies, devDependencies, name, version, engines },
+  lastBuildTime: dayjs().format('YYYY-MM-DD HH:mm:ss'),
+}
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => {
   // console.log(mode === process.env.NODE_ENV) // true
@@ -110,6 +116,7 @@ export default defineConfig(({ command, mode }) => {
     define: {
       __UNI_PLATFORM__: JSON.stringify(UNI_PLATFORM),
       __VITE_APP_PROXY__: JSON.stringify(VITE_APP_PROXY),
+      __APP_INFO__: JSON.stringify(__APP_INFO__),
     },
     css: {
       postcss: {

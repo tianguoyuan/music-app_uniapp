@@ -11,8 +11,12 @@ defineOptions({
 
 const current = ref(0)
 const swiperList = ref([])
+
+const hotSearchMsg = ref('搜索')
 onLoad(init)
 async function init() {
+  // hotSearchMsg
+
   getHomeBanner().then(({ data: { banner } }) => {
     console.log('homeBannerList', banner)
     swiperList.value = (banner || []).map((v) => ({ id: v.id, value: v.cover, type: 'image' }))
@@ -25,6 +29,9 @@ function handleBackHome() {
 function toDemo() {
   uni.navigateTo({ url: '/pages-sub/demo/demo' })
 }
+function toSearchPage() {
+  uni.navigateTo({ url: '/pages/index/search' })
+}
 </script>
 <template>
   <view class="p-3">
@@ -34,7 +41,11 @@ function toDemo() {
       </template>
     </wd-navbar>
 
-    <view class="card-swiper">
+    <view @click="toSearchPage">
+      <wd-search disabled hide-cancel :placeholder="hotSearchMsg" />
+    </view>
+
+    <view class="card-swiper mt-3">
       <wd-swiper
         v-model:current="current"
         autoplay
@@ -66,13 +77,13 @@ function toDemo() {
   :deep(.wd-swiper__item) {
     padding: 0;
   }
-  :deep(.custom-image-prev) {
-    height: 120px !important;
+  :deep(.wd-swiper__track) {
+    height: 240rpx !important;
   }
 }
 </style>
 
-<route lang="json5" type="home">
+<route lang="json5" type="page">
 {
   style: {
     navigationStyle: 'custom',
