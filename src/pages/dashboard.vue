@@ -7,11 +7,13 @@ console.log('__APP_INFO__', __APP_INFO__)
 function toHomePage() {
   uni.switchTab({ url: '/pages/index/index' })
 }
+
+const paddingTop = uni.getMenuButtonBoundingClientRect().top
 </script>
 
 <template>
   <view id="container" class="flex flex-col justify-between">
-    <view class="px-7">
+    <view class="px-7" :style="{ 'padding-top': paddingTop + 'px' }">
       <view class="pt-21 flex items-baseline">
         <view class="text-7">欢迎来到生鲜！</view>
         <view class="bg-[#1989fa] color-white px-2">{{ version }}</view>
