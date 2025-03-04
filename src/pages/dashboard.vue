@@ -1,14 +1,24 @@
 <script lang="ts" setup>
+import { useUserStore } from '@/store'
+
 //
 const { version } = __APP_INFO__.pkg
 
 console.log('__APP_INFO__', __APP_INFO__)
 
-function toHomePage() {
-  uni.switchTab({ url: '/pages/index/index' })
-}
+const userStore = useUserStore()
 
-const paddingTop = uni.getMenuButtonBoundingClientRect().top
+function toHomePage() {
+  if (userStore.token) {
+    uni.switchTab({ url: '/pages/index/index' })
+  } else {
+    uni.redirectTo({ url: '/pages/user/login' })
+  }
+}
+let paddingTop = 0
+// #ifdef MP-WEIXIN
+paddingTop = uni.getMenuButtonBoundingClientRect().top
+// #endif
 </script>
 
 <template>

@@ -3,6 +3,7 @@ import { CustomRequestOptions } from '@/interceptors/request'
 export const http = <T>(options: CustomRequestOptions) => {
   // 1. 返回 Promise 对象
   return new Promise<IResData<T>>((resolve, reject) => {
+    uni.showLoading({ title: '加载中...' })
     uni.request({
       ...options,
       dataType: 'json',
@@ -37,6 +38,9 @@ export const http = <T>(options: CustomRequestOptions) => {
           title: '网络错误，换个网络试试',
         })
         reject(err)
+      },
+      complete() {
+        uni.hideLoading()
       },
     })
   })

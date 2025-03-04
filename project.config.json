@@ -5,6 +5,8 @@
     "es6": true,
     "postcss": true,
     "minified": true,
+    "minifyWXSS": true,
+    "minifyWXML": true,
     "enhance": true,
     "showShadowRootInWxmlPanel": true,
     "packNpmRelationList": [],

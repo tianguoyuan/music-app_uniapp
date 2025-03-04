@@ -11,11 +11,12 @@
 :root,
 page {
   font-size: 14px;
-  line-height: 1;
+  line-height: 1.2;
   color: #0b1526;
   /* 禁止双击放大 */
   touch-action: manipulation;
-  background-color: #f8f9fa;
+  // background-color: #f8f9fa;
+  background-color: #fff;
 
   // 修改按主题色
   // --wot-color-theme: #37c2bc;
@@ -57,4 +58,8 @@ image {
 }
 .wd-search__block {
   padding: 4rpx 0;
+}
+
+.wd-icon {
+  font-size: 20px;
 }

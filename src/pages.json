@@ -85,7 +85,8 @@
       "type": "page",
       "layout": "default",
       "style": {
-        "navigationBarTitleText": "登录"
+        "navigationBarTitleText": "",
+        "navigationStyle": "custom"
       }
     },
     {

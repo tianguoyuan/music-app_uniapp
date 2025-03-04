@@ -33,12 +33,19 @@ function toSearchPage() {
   uni.navigateTo({ url: '/pages/index/search' })
 }
 </script>
+<script lang="ts">
+export default {
+  options: {
+    styleIsolation: 'shared', // 解除样式隔离
+  },
+}
+</script>
 <template>
   <view class="p-3">
-    <wd-navbar title="home" fixed placeholder safe-area-inset-top left-arrow>
-      <template #capsule>
+    <wd-navbar title="home" fixed placeholder safe-area-inset-top>
+      <!-- <template #capsule>
         <wd-navbar-capsule @back-home="handleBackHome" />
-      </template>
+      </template> -->
     </wd-navbar>
 
     <view @click="toSearchPage">
@@ -60,25 +67,24 @@ function toSearchPage() {
     <Tabbar tabbar-path="/pages/index/index" />
   </view>
 </template>
-
 <style lang="scss" scoped>
 .card-swiper {
   --wot-swiper-radius: 0;
   --wot-swiper-item-padding: 0 24rpx;
   --wot-swiper-nav-dot-color: #e7e7e7;
   --wot-swiper-nav-dot-active-color: #4d80f0;
-  padding-bottom: 24rpx;
+  padding-bottom: 24px;
   :deep(.custom-indicator-class) {
     color: white;
   }
   :deep(.custom-image) {
-    border-radius: 12rpx;
+    border-radius: 12px;
   }
   :deep(.wd-swiper__item) {
     padding: 0;
   }
   :deep(.wd-swiper__track) {
-    height: 240rpx !important;
+    height: 240px !important;
   }
 }
 </style>

@@ -10,3 +10,13 @@ interface HomeBannerRes {
 export const getHomeBanner = () => {
   return http.get<HomeBannerRes>('/home/banner')
 }
+
+interface UserGetPhoneCodeParams {
+  phone: string
+}
+interface UserGetPhoneCodeRes {
+  code: string
+}
+export const userGetPhoneCode = (data: UserGetPhoneCodeParams) => {
+  return http.post<UserGetPhoneCodeRes>('/user/getPhoneCode', data)
+}
