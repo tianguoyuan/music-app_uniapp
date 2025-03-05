@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { useUserStore } from '@/store'
+import PLATFORM from '@/utils/platform'
 
 //
 const { version } = __APP_INFO__.pkg
@@ -16,9 +17,9 @@ function toHomePage() {
   }
 }
 let paddingTop = 0
-// #ifdef MP-WEIXIN
-paddingTop = uni.getMenuButtonBoundingClientRect().top
-// #endif
+if (PLATFORM.isMpWeixin) {
+  paddingTop = uni.getMenuButtonBoundingClientRect().top
+}
 </script>
 
 <template>
@@ -52,7 +53,7 @@ paddingTop = uni.getMenuButtonBoundingClientRect().top
   layout: 'default',
   style: {
     navigationStyle: 'custom',
-    navigationBarTitleText: '',
+    navigationBarTitleText: '欢迎进入_生鲜超市uniapp',
   },
 }
 </route>

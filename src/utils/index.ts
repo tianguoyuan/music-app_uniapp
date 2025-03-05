@@ -79,6 +79,7 @@ export const getUrlObj = (url: string) => {
  */
 export const getAllPages = (key = 'needLogin') => {
   // 这里处理主包
+  console.log('app-all-pages', pages)
   const mainPages = [
     ...pages
       .filter((page) => !key || page[key])

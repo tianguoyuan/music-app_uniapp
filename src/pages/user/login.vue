@@ -1,8 +1,11 @@
 <script lang="ts" setup>
-import { userGetPhoneCode } from '@/service'
+import { TABBAR_PAGE_LIST } from '@/constants/page'
+import { getUserInfo, userGetPhoneCode, userLogin } from '@/service'
+import { useUserStore } from '@/store'
 import { useToast } from 'wot-design-uni'
-
 //
+
+const userStore = useUserStore()
 const { success: showSuccess } = useToast()
 
 const model = ref({
@@ -11,12 +14,34 @@ const model = ref({
 })
 
 const form = ref()
+const redirectUrl = ref('')
+
+onLoad((query) => {
+  console.log('query', query)
+  redirectUrl.value = query.redirect
+})
 
 function handleSubmit() {
   form.value
     .validate()
-    .then(({ valid, errors }) => {
-      if (valid) {
+    .then(async ({ valid, errors }) => {
+      if (!valid) return
+      const loginResult = await userLogin({
+        phone: model.value.phone,
+        code: model.value.code,
+      })
+      const infoResult = await getUserInfo({
+        token: loginResult.data.token,
+      })
+      userStore.changeToken(loginResult.data.token)
+      userStore.changeUserId(infoResult.data.userId)
+
+      if (redirectUrl.value) {
+        const pushType = TABBAR_PAGE_LIST.includes(redirectUrl.value) ? 'switchTab' : 'redirectTo'
+        uni[pushType]({
+          url: redirectUrl.value,
+        })
+      } else {
         uni.switchTab({
           url: '/pages/index/index',
         })
@@ -156,7 +181,7 @@ export default {
 {
   layout: 'default',
   style: {
-    navigationBarTitleText: '',
+    navigationBarTitleText: '登录',
     navigationStyle: 'custom',
   },
 }

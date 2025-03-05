@@ -95,5 +95,6 @@ export default {
     navigationStyle: 'custom',
     navigationBarTitleText: '首页',
   },
+  needLogin: true, // 是否需要登录标识
 }
 </route>
