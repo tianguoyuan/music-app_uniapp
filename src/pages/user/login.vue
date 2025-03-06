@@ -55,6 +55,8 @@ function handleSubmit() {
 const time = ref(0)
 const timeInstance = ref()
 function sendCode() {
+  console.log('sendCode')
+
   form.value.validate(['phone']).then(({ valid }) => {
     if (valid) {
       userGetPhoneCode({ phone: model.value.phone }).then(({ data }) => {
@@ -79,8 +81,9 @@ function toDashboard() {
   })
 }
 function toRegister() {
+  const query = redirectUrl.value ? `?redirect=${redirectUrl.value}` : ''
   uni.redirectTo({
-    url: '/pages/user/register',
+    url: `/pages/user/register` + query,
   })
 }
 </script>

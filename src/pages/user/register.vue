@@ -1,22 +1,47 @@
 <script lang="ts" setup>
-import { userGetPhoneCode } from '@/service'
+import { TABBAR_PAGE_LIST } from '@/constants/page'
+import { userGetPhoneCode, userRegister } from '@/service'
+import { useUserStore } from '@/store'
 import { useToast } from 'wot-design-uni'
 
 //
+const userStore = useUserStore()
 const { success: showSuccess } = useToast()
 
 const model = ref({
   phone: '',
   code: '',
+  username: '',
 })
 
 const form = ref()
+const redirectUrl = ref('')
+
+onLoad((query) => {
+  console.log('query', query)
+  redirectUrl.value = query.redirect
+})
 
 function handleSubmit() {
   form.value
     .validate()
-    .then(({ valid, errors }) => {
-      if (valid) {
+    .then(async ({ valid, errors }) => {
+      if (!valid) return
+      const result = await userRegister({
+        phone: model.value.phone,
+        code: model.value.code,
+        username: model.value.username,
+      })
+
+      userStore.changeToken(result.data.token)
+      userStore.changeUserId(result.data.userId)
+
+      if (redirectUrl.value) {
+        const pushType = TABBAR_PAGE_LIST.includes(redirectUrl.value) ? 'switchTab' : 'redirectTo'
+        uni[pushType]({
+          url: redirectUrl.value,
+        })
+      } else {
         uni.switchTab({
           url: '/pages/index/index',
         })
@@ -30,9 +55,13 @@ function handleSubmit() {
 const time = ref(0)
 const timeInstance = ref()
 function sendCode() {
+  console.log('sendCode')
+
   form.value.validate(['phone']).then(({ valid }) => {
     if (valid) {
-      userGetPhoneCode({ phone: model.value.phone }).then(({ data }) => {
+      userGetPhoneCode({
+        phone: model.value.phone,
+      }).then(({ data }) => {
         console.log('data', data)
         model.value.code = data.code
         time.value = 10
@@ -54,8 +83,9 @@ function toDashboard() {
   })
 }
 function toRegister() {
+  const query = redirectUrl.value ? `?redirect=${redirectUrl.value}` : ''
   uni.redirectTo({
-    url: '/pages/user/register',
+    url: `/pages/user/login` + query,
   })
 }
 </script>
@@ -76,10 +106,19 @@ export default {
       </template>
     </wd-navbar>
     <view class="flex-1 px-7">
-      <view class="mt-10 text-6">手机号码登录</view>
+      <view class="mt-10 text-6">注册</view>
       <view class="h-10"></view>
       <wd-form ref="form" :model="model">
         <wd-cell-group border>
+          <wd-input
+            v-model="model.username"
+            label="用户名"
+            label-width="100px"
+            prop="username"
+            clearable
+            placeholder="请输入用户名"
+            :rules="[{ required: true, message: '请填写用户名' }]"
+          />
           <wd-input
             v-model="model.phone"
             label="手机号"
@@ -117,16 +156,8 @@ export default {
       </wd-form>
 
       <view class="mt5 block color-[#666262] flex items-center justify-center">
-        <view @click="toRegister">新用户注册</view>
+        <view @click="toRegister">已注册, 去登录</view>
         <wd-icon name="arrow-right" size="16px"></wd-icon>
-      </view>
-    </view>
-
-    <view class="color-[#666262] pb-10">
-      <view class="text-center">其它登录方式</view>
-      <view class="mt-5 flex justify-evenly px-5">
-        <image class="w-53px h-53px" src="../../assets/icons/wechat.svg" />
-        <image class="w-53px h-53px" src="../../assets/icons/qq.svg" />
       </view>
     </view>
   </view>
@@ -138,7 +169,7 @@ export default {
     padding-right: 0;
     padding-left: 0;
   }
-  :deep(.wd-input:nth-of-type(2)::before) {
+  :deep(.wd-input:nth-of-type(3)::before) {
     position: absolute;
     bottom: 0;
     left: var(--wot-input-cell-padding, 10px);

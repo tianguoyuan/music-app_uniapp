@@ -45,3 +45,17 @@ interface UserInfoRes {
 export const getUserInfo = (data: UserInfoParams) => {
   return http.post<UserInfoRes>('/user/info', data)
 }
+
+// 用户注册
+interface UserRegisterParams {
+  phone: string
+  code: string
+  username: string
+}
+interface UserRegisterRes {
+  token: string
+  userId: string
+}
+export const userRegister = (data: UserRegisterParams) => {
+  return http.post<UserRegisterRes>('/user/register', data)
+}
