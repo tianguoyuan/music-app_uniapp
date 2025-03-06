@@ -11,6 +11,10 @@ function pageToList() {
     url: '/pages-sub/demo/list',
   })
 }
+
+function removeStorage() {
+  uni.clearStorageSync()
+}
 </script>
 
 <template>
@@ -20,6 +24,7 @@ function pageToList() {
     <view class="mt-3">
       <wd-button @click="pageToList">PageTo-List</wd-button>
     </view>
+    <wd-button class="block mt-3" @click="removeStorage">删除storage</wd-button>
   </view>
 </template>
 

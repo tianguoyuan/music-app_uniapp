@@ -2,6 +2,7 @@
 import { TABBAR_PAGE_LIST } from '@/constants/page'
 import { userGetPhoneCode, userRegister } from '@/service'
 import { useUserStore } from '@/store'
+import { urlDecode } from '@/utils/url'
 import { useToast } from 'wot-design-uni'
 
 //
@@ -19,7 +20,8 @@ const redirectUrl = ref('')
 
 onLoad((query) => {
   console.log('query', query)
-  redirectUrl.value = query.redirect
+  redirectUrl.value = urlDecode(query.redirect)
+  console.log('redirectUrl.value', redirectUrl.value)
 })
 
 function handleSubmit() {

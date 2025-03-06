@@ -43,7 +43,7 @@ export const navigateToInterceptor = {
       return true
     }
     const redirectRoute = `${loginRoute}?redirect=${encodeURIComponent(url)}`
-    uni.navigateTo({ url: redirectRoute })
+    uni.reLaunch({ url: redirectRoute })
     return false
   },
 }
