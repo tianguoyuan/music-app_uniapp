@@ -5,12 +5,19 @@ import Tabbar from '@/components/Tabbar.vue'
 defineOptions({
   name: 'User',
 })
+
+function toDemo() {
+  uni.navigateTo({ url: '/pages-sub/demo/demo' })
+}
 </script>
 <template>
   <view class="p-3">
     <wd-navbar title="user" fixed placeholder safe-area-inset-top></wd-navbar>
 
     user
+
+    <wd-button @click="toDemo">主要按钮</wd-button>
+
     <Tabbar tabbar-path="/pages/user/user" />
   </view>
 </template>

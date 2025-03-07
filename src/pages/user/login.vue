@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { TABBAR_PAGE_LIST } from '@/constants/page'
+import { PageEnum } from '@/enums/PageEnum'
 import { getUserInfo, userGetPhoneCode, userLogin } from '@/service'
 import { useUserStore } from '@/store'
 import { urlDecode } from '@/utils/url'
@@ -39,7 +39,9 @@ function handleSubmit() {
       userStore.changeUserId(infoResult.data.userId)
 
       if (redirectUrl.value) {
-        const pushType = TABBAR_PAGE_LIST.includes(redirectUrl.value) ? 'switchTab' : 'redirectTo'
+        const pushType = PageEnum.TABBAR_PAGE_LIST.includes(redirectUrl.value)
+          ? 'switchTab'
+          : 'redirectTo'
         uni[pushType]({
           url: redirectUrl.value,
         })

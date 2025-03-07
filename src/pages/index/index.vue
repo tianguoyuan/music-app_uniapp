@@ -2,12 +2,14 @@
 <script lang="ts" setup>
 import Tabbar from '@/components/Tabbar.vue'
 import { getHomeBanner } from '@/service'
-import { TestEnum } from '@/typings'
+import { searchDefaultMsg } from '@/service/home'
 import PLATFORM from '@/utils/platform'
 
 defineOptions({
   name: 'Home',
 })
+
+uni.showShareMenu()
 
 const current = ref(0)
 const swiperList = ref([])
@@ -15,7 +17,9 @@ const swiperList = ref([])
 const hotSearchMsg = ref('搜索')
 onLoad(init)
 async function init() {
-  // hotSearchMsg
+  searchDefaultMsg().then(({ data }) => {
+    hotSearchMsg.value = data.searchDefault || ''
+  })
 
   getHomeBanner().then(({ data: { banner } }) => {
     console.log('homeBannerList', banner)
@@ -23,12 +27,6 @@ async function init() {
   })
 }
 
-function handleBackHome() {
-  uni.reLaunch({ url: '/pages/index/index' })
-}
-function toDemo() {
-  uni.navigateTo({ url: '/pages-sub/demo/demo' })
-}
 function toSearchPage() {
   uni.navigateTo({ url: '/pages/index/search' })
 }
@@ -41,15 +39,28 @@ export default {
 }
 </script>
 <template>
+  <wd-navbar title="" fixed placeholder safe-area-inset-top custom-class="!bg-main">
+    <template #left>
+      <view>
+        <wd-icon name="location" color="white"></wd-icon>
+        <!-- #ifndef H5 -->
+        <wd-icon name="scan" color="white" custom-class="ml-5"></wd-icon>
+        <wd-icon name="share" color="white" custom-class="ml-5"></wd-icon>
+        <!-- #endif -->
+      </view>
+    </template>
+    <!-- #ifdef H5 -->
+    <template #right>
+      <view>
+        <wd-icon name="scan" color="white"></wd-icon>
+        <wd-icon name="share" color="white" custom-class="ml-5"></wd-icon>
+      </view>
+    </template>
+    <!-- #endif -->
+  </wd-navbar>
   <view class="p-3">
-    <wd-navbar title="home" fixed placeholder safe-area-inset-top>
-      <!-- <template #capsule>
-        <wd-navbar-capsule @back-home="handleBackHome" />
-      </template> -->
-    </wd-navbar>
-
     <view @click="toSearchPage">
-      <wd-search disabled hide-cancel :placeholder="hotSearchMsg" />
+      <wd-search disabled hide-cancel :placeholder="hotSearchMsg" placeholder-left />
     </view>
 
     <view class="card-swiper mt-3">
@@ -61,8 +72,6 @@ export default {
         :list="swiperList"
       ></wd-swiper>
     </view>
-
-    <wd-button @click="toDemo">主要按钮</wd-button>
 
     <Tabbar tabbar-path="/pages/index/index" />
   </view>
@@ -84,7 +93,11 @@ export default {
     padding: 0;
   }
   :deep(.wd-swiper__track) {
-    height: 240px !important;
+    height: 120px !important;
+  }
+  :deep(.wd-swiper__image) {
+    width: 100% !important;
+    height: 100% !important;
   }
 }
 </style>

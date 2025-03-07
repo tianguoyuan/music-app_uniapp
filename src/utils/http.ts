@@ -1,4 +1,7 @@
+import { HttpEnum } from '@/enums/HttpEnum'
+import { PageEnum } from '@/enums/PageEnum'
 import { CustomRequestOptions } from '@/interceptors/request'
+import { useUserStore } from '@/store'
 
 export const http = <T>(options: CustomRequestOptions) => {
   // 1. 返回 Promise 对象
@@ -6,41 +9,53 @@ export const http = <T>(options: CustomRequestOptions) => {
     uni.showLoading({ title: '加载中...' })
     uni.request({
       ...options,
+      timeout: HttpEnum.TIMEOUT,
       dataType: 'json',
       // #ifndef MP-WEIXIN
       responseType: 'json',
       // #endif
       // 响应成功
       success(res) {
-        // 状态码 2xx，参考 axios 的设计
-        if (res.statusCode >= 200 && res.statusCode < 300) {
-          // 2.1 提取核心数据 res.data
-          resolve(res.data as IResData<T>)
-        } else if (res.statusCode === 401) {
+        uni.hideLoading()
+        const userStore = useUserStore()
+
+        const result = res.data as IResData<T>
+        const code = result[HttpEnum.RESPONSE_CODE_FIELD] + ''
+        const msg = result[HttpEnum.RESPONSE_MSG_FIELD]
+
+        if (HttpEnum.SUCCESS_CODE_ARR.includes(code)) {
+          resolve(result)
+        } else if (code === HttpEnum.RESPONSE_CODE_ERROR_AUTH) {
           // 401错误  -> 清理用户信息，跳转到登录页
-          // userStore.clearUserInfo()
-          // uni.navigateTo({ url: '/pages/login/login' })
+          userStore.clearUserInfo()
+          uni.showToast({
+            icon: 'none',
+            title: '登录过期, 请重新登录',
+            duration: 1000 * 2,
+          })
+          uni.navigateTo({ url: PageEnum.LOGIN_PATH })
           reject(res)
         } else {
           // 其他错误 -> 根据后端错误信息轻提示
           !options.hideErrorToast &&
             uni.showToast({
               icon: 'none',
-              title: (res.data as IResData<T>).msg || '请求错误',
+              title: msg || '请求错误',
+              duration: 1000 * 2,
             })
           reject(res)
         }
       },
       // 响应失败
       fail(err) {
+        uni.hideLoading()
+
         uni.showToast({
           icon: 'none',
           title: '网络错误，换个网络试试',
+          duration: 1000 * 2,
         })
         reject(err)
-      },
-      complete() {
-        uni.hideLoading()
       },
     })
   })

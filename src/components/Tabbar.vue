@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { ColorEnum } from '@/enums/ColorEnum'
+
 const tabbarList = [
   { title: '首页', icon: 'home', path: '/pages/index/index' },
   { title: '分类', icon: 'transfer', path: '/pages/kind/kind' },
@@ -26,6 +28,7 @@ function pageTo(index: number) {
     bordered
     safe-area-inset-bottom
     placeholder
+    :active-color="ColorEnum.MAIN_COLOR"
     @update:model-value="pageTo"
   >
     <wd-tabbar-item

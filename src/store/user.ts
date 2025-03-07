@@ -18,6 +18,11 @@ export const useUserStore = defineStore(
       return !!token.value
     })
 
+    function clearUserInfo() {
+      token.value = ''
+      userId.value = ''
+    }
+
     return {
       token,
       changeToken,
@@ -25,6 +30,8 @@ export const useUserStore = defineStore(
       userId,
       changeUserId,
       isLogin,
+
+      clearUserInfo,
     }
   },
   {
