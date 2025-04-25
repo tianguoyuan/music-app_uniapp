@@ -24,6 +24,7 @@ const __APP_INFO__ = {
   pkg: { dependencies, devDependencies, name, version, engines },
   lastBuildTime: dayjs().format('YYYY-MM-DD HH:mm:ss'),
 }
+
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => {
   // console.log(mode === process.env.NODE_ENV) // true
@@ -160,6 +161,11 @@ export default defineConfig(({ command, mode }) => {
         compress: {
           drop_console: VITE_DELETE_CONSOLE === 'true',
           drop_debugger: true,
+        },
+      },
+      esbuild: {
+        supported: {
+          bigint: true,
         },
       },
     },

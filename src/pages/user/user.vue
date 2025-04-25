@@ -1,6 +1,7 @@
 <!-- 使用 type="home" 属性设置首页，其他页面不需要设置，默认为page；推荐使用json5，更强大，且允许注释 -->
 <script lang="ts" setup>
 import Tabbar from '@/components/Tabbar.vue'
+import Navbar from '@/components/Navbar.vue'
 
 defineOptions({
   name: 'User',
@@ -12,11 +13,8 @@ function toDemo() {
 </script>
 <template>
   <view class="p-3">
-    <wd-navbar title="user" fixed placeholder safe-area-inset-top></wd-navbar>
-
+    <Navbar title="user" show-home-icon />
     user
-
-    <wd-button @click="toDemo">主要按钮</wd-button>
 
     <Tabbar tabbar-path="/pages/user/user" />
   </view>

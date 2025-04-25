@@ -1,20 +1,31 @@
 <script lang="ts" setup>
+import Navbar from '@/components/Navbar.vue'
 import { PageEnum } from '@/enums/PageEnum'
 import { getUserInfo, userGetPhoneCode, userLogin } from '@/service'
 import { useUserStore } from '@/store'
 import { urlDecode } from '@/utils/url'
-import { useToast } from 'wot-design-uni'
-//
+import {
+  FormRules,
+  TnIcon,
+  TnForm,
+  TnFormItem,
+  TnInput,
+  TnNavbar,
+  TnFormInstance,
+} from '@tuniao/tnui-vue3-uniapp'
 
 const userStore = useUserStore()
-const { success: showSuccess } = useToast()
 
-const model = ref({
+const formData = ref({
   phone: '',
   code: '',
 })
-
+const formRef = ref<TnFormInstance>()
 const form = ref()
+const formRules: FormRules = {
+  phone: [{ required: true, message: '请输入手机号', trigger: ['change', 'blur'] }],
+  code: [{ required: true, message: '请输入验证码', trigger: ['change', 'blur'] }],
+}
 const redirectUrl = ref('')
 
 onLoad((query) => {
@@ -23,59 +34,49 @@ onLoad((query) => {
   console.log('redirectUrl.value', redirectUrl.value)
 })
 
-function handleSubmit() {
-  form.value
-    .validate()
-    .then(async ({ valid, errors }) => {
-      if (!valid) return
-      const loginResult = await userLogin({
-        phone: model.value.phone,
-        code: model.value.code,
-      })
-      const infoResult = await getUserInfo({
-        token: loginResult.data.token,
-      })
-      userStore.changeToken(loginResult.data.token)
-      userStore.changeUserId(infoResult.data.userId)
+async function handleSubmit() {
+  await formRef.value.validate()
+  const loginResult = await userLogin({
+    phone: formData.value.phone,
+    code: formData.value.code,
+  })
+  const infoResult = await getUserInfo({
+    token: loginResult.data.token,
+  })
+  userStore.changeToken(loginResult.data.token)
+  userStore.changeUserId(infoResult.data.userId)
 
-      if (redirectUrl.value) {
-        const pushType = PageEnum.TABBAR_PAGE_LIST.includes(redirectUrl.value)
-          ? 'switchTab'
-          : 'redirectTo'
-        uni[pushType]({
-          url: redirectUrl.value,
-        })
-      } else {
-        uni.switchTab({
-          url: '/pages/index/index',
-        })
-      }
+  if (redirectUrl.value) {
+    const pushType = PageEnum.TABBAR_PAGE_LIST.includes(redirectUrl.value)
+      ? 'switchTab'
+      : 'redirectTo'
+    uni[pushType]({
+      url: redirectUrl.value,
     })
-    .catch((error) => {
-      console.log(error, 'error')
+  } else {
+    uni.switchTab({
+      url: '/pages/index/index',
     })
+  }
 }
 
 const time = ref(0)
 const timeInstance = ref()
-function sendCode() {
+async function sendCode() {
   console.log('sendCode')
+  await formRef.value.validateField(['phone'])
 
-  form.value.validate(['phone']).then(({ valid }) => {
-    if (valid) {
-      userGetPhoneCode({ phone: model.value.phone }).then(({ data }) => {
-        console.log('data', data)
-        model.value.code = data.code
-        time.value = 10
-        timeInstance.value = setInterval(() => {
-          if (time.value <= 0) {
-            clearInterval(timeInstance.value)
-          } else {
-            time.value--
-          }
-        }, 1000)
-      })
-    }
+  userGetPhoneCode({ phone: formData.value.phone }).then(({ data }) => {
+    console.log('data', data)
+    formData.value.code = data.code
+    time.value = 10
+    timeInstance.value = setInterval(() => {
+      if (time.value <= 0) {
+        clearInterval(timeInstance.value)
+      } else {
+        time.value--
+      }
+    }, 1000)
   })
 }
 
@@ -102,84 +103,69 @@ export default {
 
 <template>
   <view id="container" class="login flex flex-col justify-between">
-    <wd-navbar title="" fixed placeholder safe-area-inset-top>
-      <template #left>
-        <wd-icon name="home1" @click="toDashboard"></wd-icon>
-      </template>
-    </wd-navbar>
+    <Navbar show-home-icon @click-home-icon="toDashboard" />
+
     <view class="flex-1 px-7">
       <view class="mt-10 text-6">手机号码登录</view>
       <view class="h-10"></view>
-      <wd-form ref="form" :model="model">
-        <wd-cell-group border>
-          <wd-input
-            v-model="model.phone"
-            label="手机号"
-            label-width="100px"
-            prop="phone"
-            clearable
-            placeholder="请输入手机号"
-            :rules="[{ required: true, message: '请填写手机号' }]"
-          />
-          <wd-input
-            v-model="model.code"
-            label="验证码"
-            label-width="100px"
-            prop="code"
-            clearable
-            placeholder="请输入验证码"
-            :rules="[{ required: true, message: '请填写验证码' }]"
-          />
-          <view class="text-right py-3">
-            <wd-text
-              :type="time !== 0 ? 'default' : 'primary'"
-              :text="'发送验证码' + (time !== 0 ? ' ' + time : '')"
-              @click="sendCode"
-            ></wd-text>
-          </view>
-        </wd-cell-group>
-        <view class="footer">
-          <view
-            class="h-11 rounded-full bg-#40AE36 text-center color-white line-height-11"
-            @click="handleSubmit"
-          >
-            提交
-          </view>
+      <TnForm ref="formRef" :model="formData" :rules="formRules" label-width="140rpx">
+        <TnFormItem label="手机号" prop="phone">
+          <TnInput v-model="formData.phone" placeholder="请输入手机号" clearable />
+        </TnFormItem>
+
+        <TnFormItem label="验证码" prop="code">
+          <TnInput v-model="formData.code" placeholder="请输入验证码" clearable />
+        </TnFormItem>
+      </TnForm>
+      <view class="text-right py-3">
+        <view
+          :class="[time === 0 ? 'color-#4d80f0' : 'color-#909399 pointer-events-none']"
+          @click="sendCode"
+        >
+          {{ '发送验证码' + (time !== 0 ? ' ' + time : '') }}
         </view>
-      </wd-form>
+      </view>
+      <view class="footer">
+        <view
+          class="h-11 rounded-full bg-#40AE36 text-center color-white line-height-11"
+          @click="handleSubmit"
+        >
+          提交
+        </view>
+      </view>
 
       <view class="mt5 block color-[#666262] flex items-center justify-center">
         <view @click="toRegister">新用户注册</view>
-        <wd-icon name="arrow-right" size="16px"></wd-icon>
+        <TnIcon name="right" size="32rpx" />
       </view>
     </view>
 
     <view class="color-[#666262] pb-10">
       <view class="text-center">其它登录方式</view>
       <view class="mt-5 flex justify-evenly px-5">
-        <image class="w-53px h-53px" src="../../assets/icons/wechat.svg" />
-        <image class="w-53px h-53px" src="../../assets/icons/qq.svg" />
+        <image class="w-14 h-14" src="../../assets/icons/wechat.svg" />
+        <image class="w-14 h-14" src="../../assets/icons/qq.svg" />
       </view>
     </view>
   </view>
 </template>
 <style lang="scss" scoped>
-//
 .login {
-  :deep(.wd-input) {
-    padding-right: 0;
-    padding-left: 0;
+  :deep(.tn-form-item__wrapper) {
+    position: relative;
+    height: 88rpx;
+    &::after {
+      position: absolute;
+      right: 40rpx;
+      bottom: 0;
+      left: 40rpx;
+      height: 1px;
+      content: '';
+      background-color: #f3f3f3;
+    }
   }
-  :deep(.wd-input:nth-of-type(2)::before) {
-    position: absolute;
-    bottom: 0;
-    left: var(--wot-input-cell-padding, 10px);
-    display: block;
-    width: calc(100% - var(--wot-input-cell-padding, 10px));
-    height: 1px;
-    content: '';
-    background: #e8e8e8;
-    transform: scaleY(0.5);
+  :deep(.tn-input) {
+    border: none;
   }
 }
 </style>

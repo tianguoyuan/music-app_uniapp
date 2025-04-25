@@ -1,7 +1,7 @@
 {
   "name": "unibest",
   "type": "commonjs",
-  "version": "2.5.5",
+  "version": "1.0.0",
   "description": "unibest - 最好的 uniapp 开发模板",
   "author": {
     "name": "feige996",
@@ -23,9 +23,9 @@
     "pnpm": ">=7.30"
   },
   "scripts": {
-    "dev:h5": "uni",
-    "dev:mp-weixin": "uni -p mp-weixin",
-    "lint:fix": "eslint . --fix",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs",
     "preinstall": "npx only-allow pnpm",
     "uvm": "npx @dcloudio/uvm@latest",
     "uvm-rm": "node ./scripts/postupgrade.js",
@@ -35,6 +35,7 @@
     "dev:app-ios": "uni -p app-ios",
     "dev:custom": "uni -p",
     "dev": "uni",
+    "dev:h5": "uni",
     "dev:h5:ssr": "uni --ssr",
     "dev:mp": "uni -p mp-weixin",
     "dev:mp-alipay": "uni -p mp-alipay",
@@ -44,6 +45,7 @@
     "dev:mp-lark": "uni -p mp-lark",
     "dev:mp-qq": "uni -p mp-qq",
     "dev:mp-toutiao": "uni -p mp-toutiao",
+    "dev:mp-weixin": "uni -p mp-weixin",
     "dev:mp-xhs": "uni -p mp-xhs",
     "dev:quickapp-webview": "uni -p quickapp-webview",
     "dev:quickapp-webview-huawei": "uni -p quickapp-webview-huawei",
@@ -68,10 +70,12 @@
     "build:quickapp-webview": "uni build -p quickapp-webview",
     "build:quickapp-webview-huawei": "uni build -p quickapp-webview-huawei",
     "build:quickapp-webview-union": "uni build -p quickapp-webview-union",
-    "prepare": "git init && husky install ",
+    "prepare": "git init && husky install",
     "type-check": "vue-tsc --noEmit",
+    "release": "standard-version",
     "cz": "czg",
-    "openapi-ts-request": "openapi-ts"
+    "openapi-ts-request": "openapi-ts",
+    "svgo": "svgo -f ./src/assets/icons -o ./src/assets/icons"
   },
   "lint-staged": {
     "**/*.{html,vue,ts,cjs,json,md}": [
@@ -82,6 +86,9 @@
     ],
     "**/*.{vue,css,scss,html}": [
       "stylelint --fix"
+    ],
+    "*.svg": [
+      "svgo"
     ]
   },
   "resolutions": {
@@ -104,13 +111,17 @@
     "@dcloudio/uni-mp-xhs": "3.0.0-4020920240930001",
     "@dcloudio/uni-quickapp-webview": "3.0.0-4020920240930001",
     "@tanstack/vue-query": "^5.62.16",
+    "@tuniao/tn-icon": "^1.11.0",
+    "@tuniao/tn-style": "^1.0.20",
+    "@tuniao/tnui-vue3-uniapp": "^1.0.22",
     "abortcontroller-polyfill": "^1.7.8",
     "dayjs": "1.11.10",
+    "mathjs": "^14.4.0",
     "pinia": "2.0.36",
     "pinia-plugin-persistedstate": "3.2.1",
     "qs": "6.5.3",
     "vue": "3.4.21",
-    "wot-design-uni": "^1.4.0",
+    "vue-i18n": "9.1.9",
     "z-paging": "^2.8.4"
   },
   "devDependencies": {
@@ -155,6 +166,7 @@
     "postcss-scss": "^4.0.9",
     "rollup-plugin-visualizer": "^5.12.0",
     "sass": "1.77.8",
+    "standard-version": "^9.5.0",
     "stylelint": "^16.11.0",
     "stylelint-config-html": "^1.1.0",
     "stylelint-config-recess-order": "^4.6.0",
@@ -162,6 +174,7 @@
     "stylelint-config-recommended-scss": "^14.1.0",
     "stylelint-config-recommended-vue": "^1.5.0",
     "stylelint-prettier": "^5.0.2",
+    "svgo": "^3.3.2",
     "terser": "^5.36.0",
     "typescript": "^5.7.2",
     "unocss": "^0.58.9",
@@ -169,6 +182,7 @@
     "unplugin-auto-import": "^0.17.8",
     "vite": "5.2.8",
     "vite-plugin-restart": "^0.4.2",
+    "vitepress": "^1.5.0",
     "vue-tsc": "^1.8.27"
   }
 }

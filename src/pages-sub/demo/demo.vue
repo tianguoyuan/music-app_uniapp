@@ -20,11 +20,11 @@ function removeStorage() {
 <template>
   <view class="">
     <view>demo -- {{ PLATFORM.platform }}</view>
-    <wd-button @click="back">back</wd-button>
+    <button @click="back">back</button>
     <view class="mt-3">
-      <wd-button @click="pageToList">PageTo-List</wd-button>
+      <button @click="pageToList">PageTo-List</button>
     </view>
-    <wd-button class="block mt-3" @click="removeStorage">删除storage</wd-button>
+    <button class="block mt-3" @click="removeStorage">删除storage</button>
   </view>
 </template>
 

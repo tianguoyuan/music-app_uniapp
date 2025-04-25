@@ -40,8 +40,8 @@ if (PLATFORM.isMpWeixin) {
         现在开始
       </view>
     </view>
-    <view class="mt-20 block h-260px w-full overflow-hidden">
-      <image class="w-375px h-375px" src="@/assets/icons/dashboardCover.svg" />
+    <view class="mt-20 block h-65 w-full overflow-hidden">
+      <image class="w-94 h-94" src="@/assets/icons/dashboardCover.svg" />
     </view>
   </view>
 </template>
