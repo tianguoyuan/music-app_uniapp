@@ -9,8 +9,6 @@ interface NavigateToOptions {
        "/pages/message/message" |
        "/pages/publish/publish" |
        "/pages/user/user" |
-       "/pages-sub/demo/demo" |
-       "/pages-sub/demo/list" |
        "/pages-sub/webview/webview";
 }
 interface RedirectToOptions extends NavigateToOptions {}
