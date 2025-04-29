@@ -30,7 +30,10 @@
         "pagePath": "pages/kind/kind"
       },
       {
-        "pagePath": "pages/shopping/shopping"
+        "pagePath": "pages/publish/publish"
+      },
+      {
+        "pagePath": "pages/message/message"
       },
       {
         "pagePath": "pages/user/user"
@@ -39,71 +42,47 @@
   },
   "pages": [
     {
-      "path": "pages/dashboard",
+      "path": "pages/index/index",
       "type": "home",
       "layout": "default",
       "style": {
         "navigationStyle": "custom",
-        "navigationBarTitleText": "欢迎进入_生鲜超市uniapp"
-      }
-    },
-    {
-      "path": "pages/index/index",
-      "type": "page",
-      "layout": "default",
-      "style": {
-        "navigationStyle": "custom",
-        "navigationBarTitleText": "index"
-      }
-    },
-    {
-      "path": "pages/index/search",
-      "type": "page",
-      "layout": "default",
-      "style": {
-        "navigationBarTitleText": "搜索"
-      }
+        "navigationBarTitleText": "首页"
+      },
+      "needLogin": false
     },
     {
       "path": "pages/kind/kind",
       "type": "page",
       "style": {
         "navigationStyle": "custom",
-        "navigationBarTitleText": "分类"
+        "navigationBarTitleText": "海蝶"
       }
     },
     {
-      "path": "pages/shopping/shopping",
+      "path": "pages/message/message",
       "type": "page",
       "style": {
         "navigationStyle": "custom",
-        "navigationBarTitleText": "购物车"
+        "navigationBarTitleText": "动态"
       }
     },
     {
-      "path": "pages/user/login",
+      "path": "pages/publish/publish",
       "type": "page",
       "layout": "default",
       "style": {
-        "navigationBarTitleText": "登录",
-        "navigationStyle": "custom"
-      }
-    },
-    {
-      "path": "pages/user/register",
-      "type": "page",
-      "layout": "default",
-      "style": {
-        "navigationBarTitleText": "用户-注册",
-        "navigationStyle": "custom"
-      }
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "index"
+      },
+      "needLogin": false
     },
     {
       "path": "pages/user/user",
       "type": "page",
       "style": {
         "navigationStyle": "custom",
-        "navigationBarTitleText": "首页"
+        "navigationBarTitleText": "我的"
       }
     }
   ],

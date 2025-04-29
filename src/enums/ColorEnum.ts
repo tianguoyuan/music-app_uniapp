@@ -1,3 +1,3 @@
 export const ColorEnum = {
-  MAIN_COLOR: '#40ae36',
+  MAIN_COLOR: '#1a1d25',
 }

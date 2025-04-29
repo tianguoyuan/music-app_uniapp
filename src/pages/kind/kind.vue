@@ -2,18 +2,20 @@
 <script lang="ts" setup>
 import Tabbar from '@/components/Tabbar.vue'
 import Navbar from '@/components/Navbar.vue'
+import PLATFORM from '@/utils/platform'
 
 defineOptions({
   name: 'Kind',
 })
+onLoad(() => {
+  if (PLATFORM.isApp) uni.hideTabBar()
+})
 </script>
 <template>
   <view class="p-3">
-    <Navbar title="kind" show-home-icon />
-
-    kind
-    <Tabbar tabbar-path="/pages/kind/kind" />
+    <view class="color-#fff">kind</view>
   </view>
+  <Tabbar tabbar-path="/pages/kind/kind" />
 </template>
 
 <style lang="scss" scoped></style>
@@ -22,7 +24,7 @@ defineOptions({
 {
   style: {
     navigationStyle: 'custom',
-    navigationBarTitleText: '分类',
+    navigationBarTitleText: '海蝶',
   },
 }
 </route>

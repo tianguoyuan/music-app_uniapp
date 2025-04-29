@@ -34,7 +34,8 @@ export default defineUniPages({
     list: [
       { pagePath: 'pages/index/index' },
       { pagePath: 'pages/kind/kind' },
-      { pagePath: 'pages/shopping/shopping' },
+      { pagePath: 'pages/publish/publish' },
+      { pagePath: 'pages/message/message' },
       { pagePath: 'pages/user/user' },
     ],
   },

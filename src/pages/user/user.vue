@@ -2,22 +2,23 @@
 <script lang="ts" setup>
 import Tabbar from '@/components/Tabbar.vue'
 import Navbar from '@/components/Navbar.vue'
+import PLATFORM from '@/utils/platform'
 
 defineOptions({
   name: 'User',
 })
-
+onLoad(() => {
+  if (PLATFORM.isApp) uni.hideTabBar()
+})
 function toDemo() {
   uni.navigateTo({ url: '/pages-sub/demo/demo' })
 }
 </script>
 <template>
   <view class="p-3">
-    <Navbar title="user" show-home-icon />
-    user
-
-    <Tabbar tabbar-path="/pages/user/user" />
+    <view class="color-#fff">user</view>
   </view>
+  <Tabbar tabbar-path="/pages/user/user" />
 </template>
 
 <style lang="scss" scoped></style>
@@ -26,7 +27,7 @@ function toDemo() {
 {
   style: {
     navigationStyle: 'custom',
-    navigationBarTitleText: '首页',
+    navigationBarTitleText: '我的',
   },
 }
 </route>

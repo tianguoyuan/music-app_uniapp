@@ -41,10 +41,10 @@ export const navigateToInterceptor = {
       return true
     }
 
-    const redirectRoute = `${loginRoute}?redirect=${encodeURIComponent(url)}`
-    uni.reLaunch({ url: redirectRoute })
-    console.log('拦截登录页面', url)
-    return false
+    // const redirectRoute = `${loginRoute}?redirect=${encodeURIComponent(url)}`
+    // uni.reLaunch({ url: redirectRoute })
+    // console.log('拦截登录页面', url)
+    // return false
   },
 }
 
