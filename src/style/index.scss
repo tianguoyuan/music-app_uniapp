@@ -24,6 +24,9 @@ page {
   // 修改按钮背景色
   // --wot-button-primary-bg-color: green;
 }
+* {
+  transition: all 100ms;
+}
 
 #container {
   height: 100vh;
