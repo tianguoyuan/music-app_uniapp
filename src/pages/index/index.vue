@@ -71,16 +71,11 @@ const currentComponent = computed(() => {
         <image class="w-4 h-4" src="../../assets/icons/search.svg" />
       </view>
     </view>
-    <KeepAlive>
-      <component :is="currentComponent" />
-    </KeepAlive>
-    <!-- <view>
-      <Recommend v-if="currentTabKey === 'recommend'" />
-      <Record v-if="currentTabKey === 'record'" />
-      <Artist v-if="currentTabKey === 'artist'" />
-      <RecordCompany v-if="currentTabKey === 'recordCompany'" />
-      <RankingList v-if="currentTabKey === 'rankingList'" />
-    </view> -->
+    <Recommend v-show="currentTabKey === 'recommend'" />
+    <Record v-show="currentTabKey === 'record'" />
+    <Artist v-show="currentTabKey === 'artist'" />
+    <RecordCompany v-show="currentTabKey === 'recordCompany'" />
+    <RankingList v-show="currentTabKey === 'rankingList'" />
   </view>
   <Tabbar tabbar-path="/pages/index/index" />
 </template>
