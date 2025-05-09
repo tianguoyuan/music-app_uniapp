@@ -51,6 +51,7 @@ const currentComponent = computed(() => {
 </script>
 
 <template>
+  <view v-if="!PLATFORM.isMp" class="mt-4" />
   <view class="px-5 pt-safe">
     <view class="sticky bg-#1a1d25 top-0 z-10">
       <view v-if="PLATFORM.isMpWeixin" :style="{ height: getNavbarTop() + 'px' }"></view>
