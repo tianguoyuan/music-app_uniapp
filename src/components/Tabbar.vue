@@ -53,7 +53,7 @@ function pageTo(index: number) {
 
 <template>
   <TnTabbar
-    v-show="!tabbarStore.hideTabbar"
+    v-if="!tabbarStore.hideTabbar"
     :model-value="tabbarStore.tabbarIndex"
     fixed
     :bg-color="ColorEnum.MAIN_COLOR"

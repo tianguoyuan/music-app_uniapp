@@ -33,21 +33,6 @@ function tabClick(item: (typeof homeTabList.value)[number]) {
 }
 type HomeTabListKey = 'recommend' | 'record' | 'artist' | 'recordCompany' | 'rankingList'
 const currentTabKey = computed(() => homeTabList.value.find((v) => v.active).key as HomeTabListKey)
-
-// eslint-disable-next-line vue/return-in-computed-property
-const currentComponent = computed(() => {
-  if (currentTabKey.value === 'recommend') {
-    return Recommend
-  } else if (currentTabKey.value === 'record') {
-    return Record
-  } else if (currentTabKey.value === 'artist') {
-    return Artist
-  } else if (currentTabKey.value === 'recordCompany') {
-    return RecordCompany
-  } else if (currentTabKey.value === 'rankingList') {
-    return RankingList
-  }
-})
 </script>
 
 <template>
@@ -81,7 +66,6 @@ const currentComponent = computed(() => {
     <Artist v-show="currentTabKey === 'artist'" />
     <RecordCompany v-show="currentTabKey === 'recordCompany'" />
     <RankingList v-show="currentTabKey === 'rankingList'" />
-
     <!-- 占据空白位置 -->
     <view class="h-5" />
   </view>

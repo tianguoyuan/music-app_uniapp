@@ -13,7 +13,7 @@ onLoad(() => {
 </script>
 <template>
   <view class="p-3">
-    <view class="color-#fff">shopping</view>
+    <view class="color-#fff">message</view>
   </view>
   <Tabbar tabbar-path="/pages/message/message" />
 </template>

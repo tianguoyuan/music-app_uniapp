@@ -16,7 +16,7 @@ function toDashboard() {
 
 <template>
   <view class="p-3">
-    <view class="color-#fff">user</view>
+    <view class="color-#fff">publish</view>
   </view>
   <Tabbar tabbar-path="/pages/publish/publish" />
 </template>
