@@ -1,5 +1,5 @@
 import { pages, subPackages, tabBar } from '@/pages.json'
-import { isMpWeixin } from './platform'
+import PLATFORM, { isMpWeixin } from './platform'
 
 const getLastPage = () => {
   // getCurrentPages() 至少有1个元素，所以不再额外判断
@@ -175,4 +175,18 @@ export const getEnvBaseUploadUrl = () => {
   }
 
   return baseUploadUrl
+}
+
+export const getSafeArea = () => {
+  const system = uni.getSystemInfoSync()
+  return {
+    statusBarHeight: system.statusBarHeight,
+    safeArea: system.safeArea,
+  }
+}
+
+export const getNavbarTop = () => {
+  const rect = uni.getMenuButtonBoundingClientRect()
+
+  return rect.top
 }

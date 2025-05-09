@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { ColorEnum } from '@/enums/ColorEnum'
-import { TnTabbar, TnTabbarItem } from '@tuniao/tnui-vue3-uniapp'
+import TnTabbar from '@tuniao/tnui-vue3-uniapp/components/tabbar/src/tabbar.vue'
+import TnTabbarItem from '@tuniao/tnui-vue3-uniapp/components/tabbar/src/tabbar-item.vue'
 import { useTabbarStore } from '@/store/tabbar'
 import IconHome from '@/assets/icons/home.svg'
 import IconHomeActive from '@/assets/icons/homeActive.svg'
@@ -11,6 +12,7 @@ import IconMessageActive from '@/assets/icons/messageActive.svg'
 import IconUser from '@/assets/icons/user.svg'
 import IconUserActive from '@/assets/icons/userActive.svg'
 import IconPublish from '@/assets/icons/publish.svg'
+import { getSafeArea } from '@/utils'
 
 const tabbarStore = useTabbarStore()
 
@@ -25,7 +27,7 @@ const tabbarList = [
     path: '/pages/message/message',
   },
   { title: '我的', icon: IconUser, activeIcon: IconUserActive, path: '/pages/user/user' },
-] as const
+]
 type PathType = (typeof tabbarList)[number]['path']
 const props = withDefaults(
   defineProps<{
@@ -51,7 +53,7 @@ function pageTo(index: number) {
 
 <template>
   <TnTabbar
-    v-if="!tabbarStore.hideTabbar"
+    v-show="!tabbarStore.hideTabbar"
     :model-value="tabbarStore.tabbarIndex"
     fixed
     :bg-color="ColorEnum.MAIN_COLOR"
@@ -62,7 +64,7 @@ function pageTo(index: number) {
   >
     <TnTabbarItem v-for="(item, index) in tabbarList" :key="index" @click="pageTo(index)">
       <template #default>
-        <view v-if="item.title" class="flex-1 flex items-center">
+        <view v-if="item.title" class="flex-1 flex items-center h-45px">
           <view class="flex flex-col items-center justify-center text-3">
             <view>
               <image
@@ -76,7 +78,7 @@ function pageTo(index: number) {
           </view>
         </view>
 
-        <view v-else class="flex-1 flex items-start">
+        <view v-else class="flex-1 flex items-start h-10">
           <image :src="item.icon" class="w-9 h-9 mt-1" />
         </view>
       </template>
