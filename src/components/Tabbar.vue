@@ -78,7 +78,7 @@ function pageTo(index: number) {
           </view>
         </view>
 
-        <view v-else class="flex-1 flex items-start h-10">
+        <view v-else class="flex-1 flex items-start h-45px">
           <image :src="item.icon" class="w-9 h-9 mt-1" />
         </view>
       </template>
