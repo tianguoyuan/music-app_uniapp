@@ -83,7 +83,7 @@ const currentComponent = computed(() => {
     <RankingList v-show="currentTabKey === 'rankingList'" />
 
     <!-- 占据空白位置 -->
-    <view class="h-10" />
+    <view class="h-5" />
   </view>
   <Tabbar tabbar-path="/pages/index/index" />
 </template>
