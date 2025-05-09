@@ -80,6 +80,9 @@ const currentComponent = computed(() => {
     <Artist v-show="currentTabKey === 'artist'" />
     <RecordCompany v-show="currentTabKey === 'recordCompany'" />
     <RankingList v-show="currentTabKey === 'rankingList'" />
+
+    <!-- 占据空白位置 -->
+    <view class="h-10" />
   </view>
   <Tabbar tabbar-path="/pages/index/index" />
 </template>
