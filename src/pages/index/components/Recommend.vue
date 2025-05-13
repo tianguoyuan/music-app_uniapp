@@ -1,13 +1,13 @@
 <script lang="ts" setup>
-import ICON_MUSIC1 from '../../../assets/icons/musicList1.svg'
-import ICON_MUSIC2 from '../../../assets/icons/musicList2.svg'
-import ICON_MUSIC3 from '../../../assets/icons/musicList3.svg'
-import ICON_MUSIC4 from '../../../assets/icons/musicList4.svg'
-import ICON_MUSIC5 from '../../../assets/icons/musicList5.svg'
-import ICON_MUSIC6 from '../../../assets/icons/musicList6.svg'
-import ICON_MUSIC7 from '../../../assets/icons/musicList7.svg'
-import ICON_MUSIC8 from '../../../assets/icons/musicList8.svg'
-import ICON_MUSIC9 from '../../../assets/icons/musicList9.svg'
+import ICON_MUSIC1 from '@/assets/icons/musicList1.svg'
+import ICON_MUSIC2 from '@/assets/icons/musicList2.svg'
+import ICON_MUSIC3 from '@/assets/icons/musicList3.svg'
+import ICON_MUSIC4 from '@/assets/icons/musicList4.svg'
+import ICON_MUSIC5 from '@/assets/icons/musicList5.svg'
+import ICON_MUSIC6 from '@/assets/icons/musicList6.svg'
+import ICON_MUSIC7 from '@/assets/icons/musicList7.svg'
+import ICON_MUSIC8 from '@/assets/icons/musicList8.svg'
+import ICON_MUSIC9 from '@/assets/icons/musicList9.svg'
 
 const musicList = [
   { label: '纯装机小白，不想上烈士墙了，有什么需要注意的？', icon: ICON_MUSIC1 },
@@ -29,7 +29,7 @@ const musicList = [
   <view>
     <!-- banner -->
     <view class="mt-5">
-      <image src="../../../assets/images/indexBanner.png" mode="widthFix" class="w-full" />
+      <image src="@/assets/images/indexBanner.png" mode="widthFix" class="w-full" />
     </view>
     <!-- 歌单推荐 -->
     <view class="mt-5">
@@ -40,7 +40,7 @@ const musicList = [
 
       <view class="mt-2.5 relative">
         <image
-          src="../../../assets/images/indexBackgroundPlaylistRecommendation.png"
+          src="@/assets/images/indexBackgroundPlaylistRecommendation.png"
           mode="widthFix"
           class="w-full"
         />
@@ -53,7 +53,7 @@ const musicList = [
           </view>
           <view class="mt-3 flex">
             <view class="flex px-2 py-1.5 bg-#252830">
-              <image src="../../../assets/images/singleMusic.png" mode="widthFix" class="w-1.8" />
+              <image src="@/assets/images/singleMusic.png" mode="widthFix" class="w-1.8" />
               <view class="color-#fff text-2.5 ml-1">442</view>
             </view>
           </view>

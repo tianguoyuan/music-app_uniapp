@@ -21,11 +21,11 @@ function toDashboard() {
 }
 
 const homeTabList = ref([
-  { label: '推荐', key: 'recommend', active: true },
+  { label: '推荐', key: 'recommend', active: false },
   { label: '唱片', key: 'record', active: false },
   { label: '艺术家', key: 'artist', active: false },
   { label: '唱片公司', key: 'recordCompany', active: false },
-  { label: '榜单', key: 'rankingList', active: false },
+  { label: '榜单', key: 'rankingList', active: true },
 ])
 function tabClick(item: (typeof homeTabList.value)[number]) {
   homeTabList.value.forEach((v) => (v.active = false))
@@ -36,8 +36,8 @@ const currentTabKey = computed(() => homeTabList.value.find((v) => v.active).key
 </script>
 
 <template>
-  <view class="px-5 pt-safe">
-    <view class="sticky bg-#1a1d25 top-0 z-10">
+  <view class="pt-safe">
+    <view class="sticky bg-#1a1d25 top-0 z-10 px-5">
       <view v-if="!PLATFORM.isMp" class="h-4" />
       <view v-if="PLATFORM.isMpWeixin" :style="{ height: getNavbarTop() + 'px' }"></view>
       <view class="pb-4 flex justify-between items-center">
