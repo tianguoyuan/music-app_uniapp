@@ -21,11 +21,11 @@ function toDashboard() {
 }
 
 const homeTabList = ref([
-  { label: '推荐', key: 'recommend', active: false },
+  { label: '推荐', key: 'recommend', active: true },
   { label: '唱片', key: 'record', active: false },
   { label: '艺术家', key: 'artist', active: false },
   { label: '唱片公司', key: 'recordCompany', active: false },
-  { label: '榜单', key: 'rankingList', active: true },
+  { label: '榜单', key: 'rankingList', active: false },
 ])
 function tabClick(item: (typeof homeTabList.value)[number]) {
   homeTabList.value.forEach((v) => (v.active = false))
