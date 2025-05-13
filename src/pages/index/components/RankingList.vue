@@ -92,7 +92,7 @@ const listData = [
 </script>
 
 <template>
-  <view class="px-3">
+  <view class="px-5">
     <view v-for="(item, index) in listData" :key="index" class="flex bg-#252830 mt-5">
       <view class="w-32 h-32 relative overflow-hidden flex-shrink-0">
         <image :src="item.icon" class="w-full h-full" />

@@ -26,7 +26,7 @@ const musicList = [
 </script>
 
 <template>
-  <view>
+  <view class="px-5">
     <!-- banner -->
     <view class="mt-5">
       <image src="@/assets/images/indexBanner.png" mode="widthFix" class="w-full" />

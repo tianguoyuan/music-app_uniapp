@@ -44,7 +44,7 @@ const listData = [
 
 <template>
   <view class="mt-5">
-    <view class="grid grid-cols-3 gap-3 color-#fff text-3.5 px-3">
+    <view class="grid grid-cols-3 gap-3 color-#fff text-3.5 px-5">
       <view class="bg-[linear-gradient(90deg,#716363_0%,#9A8584_100%)] h-12 line-height-12 pl-2.5">
         作曲
       </view>
