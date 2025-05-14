@@ -48,7 +48,7 @@ const listData = [
       </view>
       <view class="bg-#252830 color-#fff flex items-center justify-center px-2 py-1">
         <image class="w-2.5 h-2.5" :src="IMG_FILTER" />
-        <view>筛选</view>
+        <view class="ml-1">筛选</view>
       </view>
     </view>
 

@@ -57,7 +57,7 @@ const currentTabKey = computed(() => homeTabList.value.find((v) => v.active).key
           </view>
         </view>
         <view>
-          <image class="w-4 h-4" src="../../assets/icons/search.svg" />
+          <image class="w-4 h-4" src="@/assets/icons/search.svg" />
         </view>
       </view>
     </view>
