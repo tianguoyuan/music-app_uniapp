@@ -140,7 +140,7 @@ const listData = [
       <image :src="item.userAvatar" class="w-10 h-10" />
       <view class="ml-2.5 line-height-4.25">
         <view class="flex">
-          <view class="text-3 color-#fff"></view>
+          <view class="text-3 color-#fff">{{ item.username }}</view>
           <view class="ml-1 text-2.5 color-#818387">{{ item.articleType }}</view>
         </view>
         <view class="text-2.5 color-#818387">{{ item.date }}</view>
