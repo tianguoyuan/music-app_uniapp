@@ -19,12 +19,15 @@ const tabbarStore = useTabbarStore()
 const tabbarList = [
   { title: '首页', icon: IconHome, activeIcon: IconHomeActive, path: '/pages/index/index' },
   { title: '海蝶', icon: IconAlbum, activeIcon: IconAlbumActive, path: '/pages/kind/kind' },
-  { icon: IconPublish, path: '/pages/publish/publish' },
+  {
+    icon: IconPublish,
+    // path: '/pages/publish/publish'
+  },
   {
     title: '动态',
     icon: IconMessage,
     activeIcon: IconMessageActive,
-    // path: '/pages/message/message',
+    path: '/pages/message/message',
   },
   { title: '我的', icon: IconUser, activeIcon: IconUserActive, path: '/pages/user/user' },
 ]
@@ -44,9 +47,9 @@ const tabbarIndex = tabbarList.findIndex((v) => v.path === props.tabbarPath)
 tabbarStore.changeTabbarIndex(tabbarIndex)
 
 function pageTo(index: number) {
-  tabbarStore.changeTabbarIndex(index)
   const path = tabbarList[index]?.path
   if (!path) return
+  tabbarStore.changeTabbarIndex(index)
   uni.switchTab({ url: path })
 }
 </script>
