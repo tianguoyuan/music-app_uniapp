@@ -24,7 +24,7 @@ const tabbarList = [
     title: '动态',
     icon: IconMessage,
     activeIcon: IconMessageActive,
-    path: '/pages/message/message',
+    // path: '/pages/message/message',
   },
   { title: '我的', icon: IconUser, activeIcon: IconUserActive, path: '/pages/user/user' },
 ]
