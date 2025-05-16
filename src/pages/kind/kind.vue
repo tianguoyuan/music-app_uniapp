@@ -2,7 +2,7 @@
 <script lang="ts" setup>
 import Tabbar from '@/components/Tabbar.vue'
 import Navbar from '@/components/Navbar.vue'
-import PLATFORM from '@/utils/platform'
+import PLATFORM, { platform } from '@/utils/platform'
 
 import ICON_BG_COVER from '@/assets/icons/musicListBgCover.svg'
 import IMG_FILTER from '@/assets/icons/filter.svg'
@@ -14,6 +14,7 @@ import IMG_KIND_LIST2 from '@/assets/icons/kindList2.svg'
 import IMG_KIND_LIST3 from '@/assets/icons/kindList3.svg'
 import IMG_KIND_LIST4 from '@/assets/icons/kindList4.svg'
 import IMG_KIND_LIST5 from '@/assets/icons/kindList5.svg'
+import { getNavbarTop } from '@/utils'
 
 const musicList = [
   {
@@ -77,7 +78,8 @@ onLoad(() => {
 })
 </script>
 <template>
-  <view class="p-5">
+  <view v-if="PLATFORM.isMpWeixin" :style="{ height: getNavbarTop() + 'px' }" />
+  <view class="p-5 pt-0">
     <view class="color-#fff flex justify-between text-4">
       <view>淘碟</view>
       <image class="w-4 h-4" src="@/assets/icons/search.svg" />

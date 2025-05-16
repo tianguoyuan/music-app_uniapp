@@ -15,6 +15,7 @@ import IMG_USER_LIST3 from '@/assets/icons/userList3.svg'
 import IMG_USER_LIST4 from '@/assets/icons/userList4.svg'
 import IMG_USER_LIST5 from '@/assets/icons/userList5.svg'
 import IMG_USER_LIST6 from '@/assets/icons/userList6.svg'
+import { getNavbarTop } from '@/utils'
 
 defineOptions({
   name: 'User',
@@ -45,7 +46,10 @@ const list = [
   <view class="pt-safe">
     <view class="relative w-full h-55">
       <image class="absolute h-full w-full" :src="IMG_USER_BGCOVER" />
-      <view class="flex justify-between px-5 pt-7 items-center">
+      <view
+        class="flex justify-between px-5 pt-7 items-center"
+        :style="{ 'padding-top': PLATFORM.isMpWeixin ? getNavbarTop() + 'px' : '' }"
+      >
         <image class="w-5 h-5" src="@/assets/icons/setting.svg" />
         <image class="w-4 h-4" src="@/assets/icons/search.svg" />
       </view>
