@@ -15,8 +15,9 @@ import IMG_USER_LIST3 from '@/assets/icons/userList3.svg'
 import IMG_USER_LIST4 from '@/assets/icons/userList4.svg'
 import IMG_USER_LIST5 from '@/assets/icons/userList5.svg'
 import IMG_USER_LIST6 from '@/assets/icons/userList6.svg'
-import { getNavbarTop } from '@/utils'
+import { useUniAppSystemRectInfo } from '@/utils/useUniAppSystemRectInfo'
 
+const { navBarInfo } = useUniAppSystemRectInfo()
 defineOptions({
   name: 'User',
 })
@@ -43,15 +44,19 @@ const list = [
 ]
 </script>
 <template>
-  <view class="pt-safe">
+  <view>
     <view class="relative w-full h-55">
       <image class="absolute h-full w-full" :src="IMG_USER_BGCOVER" />
-      <view
-        class="flex justify-between px-5 pt-7 items-center"
-        :style="{ 'padding-top': PLATFORM.isMpWeixin ? getNavbarTop() + 'px' : '' }"
-      >
-        <image class="w-5 h-5" src="@/assets/icons/setting.svg" />
-        <image class="w-4 h-4" src="@/assets/icons/search.svg" />
+      <view :style="{ 'padding-top': navBarInfo.statusHeight + 'px' }">
+        <view
+          class="flex justify-between px-5 items-center"
+          :style="{
+            height: navBarInfo.height - navBarInfo.statusHeight + 'px',
+          }"
+        >
+          <image class="w-5 h-5" src="@/assets/icons/setting.svg" />
+          <image class="w-4 h-4" src="@/assets/icons/search.svg" />
+        </view>
       </view>
 
       <view class="absolute right-5 bottom-5">

@@ -15,6 +15,9 @@ import IMG_KIND_LIST3 from '@/assets/icons/kindList3.svg'
 import IMG_KIND_LIST4 from '@/assets/icons/kindList4.svg'
 import IMG_KIND_LIST5 from '@/assets/icons/kindList5.svg'
 import { getNavbarTop } from '@/utils'
+import { useUniAppSystemRectInfo } from '@/utils/useUniAppSystemRectInfo'
+
+const { navBarInfo } = useUniAppSystemRectInfo()
 
 const musicList = [
   {
@@ -78,14 +81,16 @@ onLoad(() => {
 })
 </script>
 <template>
-  <view v-if="PLATFORM.isMpWeixin" :style="{ height: getNavbarTop() + 'px' }" />
-  <view class="p-5 pt-0">
-    <view class="color-#fff flex justify-between text-4">
+  <view class="px-5" :style="{ paddingTop: navBarInfo.statusHeight + 'px' }">
+    <view
+      class="color-#fff flex justify-between text-4 items-center"
+      :style="{ height: navBarInfo.height - navBarInfo.statusHeight + 'px' }"
+    >
       <view>淘碟</view>
       <image class="w-4 h-4" src="@/assets/icons/search.svg" />
     </view>
 
-    <image class="w-full mt-5" :src="IMG_KIND_BANNER" mode="widthFix" />
+    <image class="w-full mt-3" :src="IMG_KIND_BANNER" mode="widthFix" />
 
     <view class="mt-5">
       <view class="flex justify-between mt-2">
