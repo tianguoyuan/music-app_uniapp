@@ -44,7 +44,7 @@ $appMaxWidth: 500px;
     max-width: $appMaxWidth; /* 设计稿宽度 */
     min-height: 100%;
     margin: 0 auto;
-    background: #fff;
+    background: #1a1d25;
   }
   .tn-navbar,
   .tn-tabbar {
